@@ -810,7 +810,32 @@ class Solution:
                 popIndex += 1
         return len(temp)==0
 ```
-
+**字符串全排列**
+- 描述
+输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+- 思路
+每次将一个字符作为第一个字符，然后剩下字符全排列即可。故利用递归来实现，每一个位置字符与第一个字符交换，剩下的字符递归调用全排列，然后再交换一次使得字符串复原。递归出口为待排列字符串只有一个字符。
+- python答案
+```python
+class Solution:
+    def Permutation(self, ss):
+        if len(ss)<=1:
+            return list(ss)
+        ss_set = set() #利用集合进行去重
+        def helper(str_list,begin,end):
+            if begin == end:
+                s = ''
+                for ch in str_list:
+                    s += ch
+                ss_set.add(s)
+                return
+            for i in range(begin,end+1):
+                str_list[i],str_list[begin] = str_list[begin],str_list[i]
+                helper(str_list,begin+1,end)
+                str_list[i],str_list[begin] = str_list[begin],str_list[i]
+        helper(list(ss),0,len(ss)-1)
+        return sorted(ss_set) #利用sorted函数进行按照字典排序
+```
 
 
 

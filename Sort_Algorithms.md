@@ -513,9 +513,10 @@ def countSort(array):
 ### 算法思想
 
 桶排序和计数排序一样，也是一种非比较排序（只不过在每个桶的内部采用的排序算法可能需要比较)。桶排序首先将原始数组按照映射函数映射到i个桶中（如0-99之间的数按照十位上的数可以映射到10个桶中），然后对每个桶内元素进行排序（可以用不同的排序方式），最后按照桶的顺序依次将不同桶中的数据拼接起来即是有序序列。  
-其排序示意图如下所示：![桶排序](https://github.com/woniuhuli/LeetCode_practice/blob/master/src/%E6%A1%B6%E6%8E%92%E5%BA%8F.jpg?raw=true)
+其排序示意图如下所示：  
+![桶排序](https://github.com/woniuhuli/LeetCode_practice/blob/master/src/%E6%A1%B6%E6%8E%92%E5%BA%8F.jpg?raw=true)
 
-###代码实现
+### 代码实现
 - python
 ```python
 def bucketSort(array,bucketsize):
