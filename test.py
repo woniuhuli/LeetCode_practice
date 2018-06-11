@@ -37,9 +37,50 @@ def MAL(a):
     return max(MaxLen)
 
 
+def swim(heap,index):
+    if(index==0):
+        return
+    parent = (index-1)//2
+    if heap[parent]<=heap[index]:
+        return
+    else:
+        heap[parent],heap[index] = heap[index],heap[parent]
+        swim(heap,parent)
+def sink(heap,index):
+    heapSize = len(heap)
+    leftChild = 2*(index+1) - 1
+    rightChild = leftChild + 1
+    if leftChild >= heapSize:
+        return
+    minIndex = index
+    if heap[leftChild]<heap[minIndex]:
+        minIndex = leftChild
+    if (rightChild < heapSize and heap[rightChild] < heap[minIndex]):
+        minIndex = rightChild
+    if minIndex == index:
+        return
+    else:
+        heap[index],heap[minIndex] = heap[minIndex],heap[index]
+        sink(heap,minIndex)
+def buildHeap(array):
+    heapSize = len(array)
+    index = heapSize//2 - 1
+    for i in range(index,-1,-1):
+        sink(array,i)
+def topK(array,k):
+    heap = array[0:k]
+    buildHeap(heap)
+    for i in range(k,len(array)):
+        if array[i] > heap[0]:
+            heap[0] = array[i]
+            sink(heap,0)
+    return heap
+
+
 if __name__ == "__main__":
-    s1 = 'abcfbc'
-    s2 = 'abfcabc'
-    print(LCS2(s1,s2))
-    # a =[1, 7, 3, 5, 9, 4,5, 8]
-    # print(MAL(a))
+    # s1 = 'abcfbc'
+    # s2 = 'abfcabC'
+    # print(LCS2(s1,s2))
+    a =[4, 7, 3, 5, 9, 4,5, 8,6]
+    #print(MAL(a))
+    print(topK(a,4))
