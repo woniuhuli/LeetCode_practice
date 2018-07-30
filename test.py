@@ -76,11 +76,34 @@ def topK(array,k):
             sink(heap,0)
     return heap
 
+def getRow(rowIndex):
+    """
+    :type rowIndex: int
+    :rtype: List[int]
+    """
+    ans = [1 for _ in range(rowIndex+1)]
+    for row in range(2,rowIndex+1):
+        t2 = 1
+        for column in range(1,row):
+            t1 = ans[column]
+            ans[column] = ans[column] + t2
+            t2 = t1
+    return ans
 
+def findMin(nums):
+    if nums[-1] >=nums[0]:
+        return nums[0]
+    mid = len(nums)//2
+    if nums[mid] > nums[0]:
+        return findMin(nums[mid:])
+    else:
+        return findMin(nums[1:mid+1])
 if __name__ == "__main__":
     # s1 = 'abcfbc'
     # s2 = 'abfcabC'
     # print(LCS2(s1,s2))
     a =[4, 7, 3, 5, 9, 4,5, 8,6]
     #print(MAL(a))
-    print(topK(a,4))
+    #print(topK(a,4))
+    nums = [3,4,5,1,2]
+    print(findMin(nums))
